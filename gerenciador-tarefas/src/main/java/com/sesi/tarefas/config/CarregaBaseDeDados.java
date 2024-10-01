@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.sesi.tarefas.model.TarefaCategoria;
+import com.sesi.tarefas.model.Usuario;
 import com.sesi.tarefas.repository.TarefaCategoriaRepository;
 
 @Configuration
@@ -17,6 +18,14 @@ public class CarregaBaseDeDados {
 	@Bean
 	CommandLineRunner executar() {
 		return ergs ->{
+			Usuario usuario=new Usuario();
+			usuario.setNome("Fulano");
+			usuario.setSenha("senha123");
+			
+			Usuario usuario2=new Usuario();
+			usuario.setNome("Fulana");
+			usuario.setSenha("senha456");
+			
 			TarefaCategoria categoria1=new TarefaCategoria();
 			categoria1.setNome("teste");
 			tarefaCategoriaRepository.save(categoria1);
