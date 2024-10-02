@@ -23,12 +23,12 @@
           <td th:text="${usuario.id}"></td>
           <td th:text="${usuario.nome}" class="w-55"></td>
           <td>
-            <!--  <a th:href="@{/editarCategoria/{id} (id=${categoria.id})}">
+            <a th:href="@{/usuarios/editarUsuario/{id} (id=${usuario.id})}">
               <button type="button" class="btn btn-primary">Editar</button>
             </a>
-            <a th:href="@{/excluirCategoria/{id} (id=${categoria.id})}">
+            <a th:href="@{/usuarios/excluirUsuario/{id} (id=${usuario.id})}">
               <button type="button" class="btn btn-danger">Excluir</button>
-            </a>-->
+            </a>
           </td>
         </tr>
       </tbody>
