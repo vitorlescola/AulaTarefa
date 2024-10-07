@@ -36,17 +36,20 @@ public class TarefaController {
 		return "listarTarefas";
 	}
 	
-	/*@GetMapping("editarTarefa/{id}")
+	@GetMapping("editarTarefa/{id}")
 	public String editarTarefa(@PathVariable("id") int id, Model modelo) {
-		Optional<Tarefa> usuarioOpt = tarefaRepository.findById(id);
+		Optional<Tarefa> tarefaOpt = tarefaRepository.findById(id);
 		
-		if(usuarioOpt.isPresent()) {
-			modelo.addAttribute("tarefa", usuarioOpt.get());
+		modelo.addAttribute("usuarios",usuarioRepository.findAll());
+		modelo.addAttribute("categorias",categoriaRepository.findAll());
+		
+		if(tarefaOpt.isPresent()) {
+			modelo.addAttribute("tarefa", tarefaOpt.get());
 			return "formularioTarefa";
 		}else {
-			return "redirect:/tarefas/listarTarefa";
+			return "redirect:/tarefas/listarTarefas";
 		}
-	}*/
+	}
 	
 	@GetMapping("/formularioTarefa")
 	public String mostrarFormulario(Model modelo) {
@@ -57,15 +60,14 @@ public class TarefaController {
 	}
 	
 	@PostMapping("/salvarTarefa")
-	public String salvarTarefa( Tarefa tarefa) {
+	public String salvarTarefa(Tarefa tarefa) {
 		tarefaRepository.save(tarefa);
 		return "redirect:/tarefas/listarTarefas";
 	}
 	
-	/*@GetMapping("/excluirTarefa/{id}")
+	@GetMapping("/excluirTarefa/{id}")
 	public String excluirTarefa(@PathVariable("id") int id) {
 		tarefaRepository.deleteById(id);
 		return "redirect:/tarefas/listarTarefas";
-	}*/
-
+	}
 }
