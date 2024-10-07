@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sesi.tarefas.model.Tarefa;
 import com.sesi.tarefas.model.Usuario;
+import com.sesi.tarefas.repository.TarefaCategoriaRepository;
 import com.sesi.tarefas.repository.TarefaRepository;
+import com.sesi.tarefas.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping("/tarefas")
@@ -22,13 +24,19 @@ public class TarefaController {
 	@Autowired
 	TarefaRepository tarefaRepository;
 	
+	@Autowired
+	UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	TarefaCategoriaRepository categoriaRepository;
+	
 	@GetMapping("/listarTarefas")
 	public String listarTarefas(Model modelo) {
 		modelo.addAttribute("tarefas",tarefaRepository.findAll());
 		return "listarTarefas";
 	}
 	
-	@GetMapping("editarTarefa/{id}")
+	/*@GetMapping("editarTarefa/{id}")
 	public String editarTarefa(@PathVariable("id") int id, Model modelo) {
 		Optional<Tarefa> usuarioOpt = tarefaRepository.findById(id);
 		
@@ -38,24 +46,26 @@ public class TarefaController {
 		}else {
 			return "redirect:/tarefas/listarTarefa";
 		}
-	}
+	}*/
 	
 	@GetMapping("/formularioTarefa")
 	public String mostrarFormulario(Model modelo) {
 		modelo.addAttribute("tarefa", new Tarefa());
+		modelo.addAttribute("usuarios",usuarioRepository.findAll());
+		modelo.addAttribute("categorias",categoriaRepository.findAll());
 		return "formularioTarefa";
 	}
 	
 	@PostMapping("/salvarTarefa")
-	public String salvarTarefa(@ModelAttribute Tarefa tarefa) {
+	public String salvarTarefa( Tarefa tarefa) {
 		tarefaRepository.save(tarefa);
 		return "redirect:/tarefas/listarTarefas";
 	}
 	
-	@GetMapping("/excluirTarefa/{id}")
+	/*@GetMapping("/excluirTarefa/{id}")
 	public String excluirTarefa(@PathVariable("id") int id) {
 		tarefaRepository.deleteById(id);
 		return "redirect:/tarefas/listarTarefas";
-	}
+	}*/
 
 }
